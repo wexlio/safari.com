@@ -11,9 +11,9 @@
 // console.log(data[4][0].colorPrincipalPagina);
 // var arraysPrincipales  = localStorage.getItem("arrays11");
 
-const cerrar = document.querySelector("title");
+const title = document.querySelector("title");
 
-cerrar.innerHTML = data[4][0].nombreTienda;
+title.innerHTML = data[4][0].nombreTienda;
 
 console.log(data[4][0].colorPrincipalPagina);
 
