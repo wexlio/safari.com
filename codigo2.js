@@ -1,5 +1,8 @@
 // const data = JSON.parse(arraysPrincipales);
 
+const title = document.querySelector("title");
+
+title.innerHTML = data[4][0].nombreTienda;
 
 // ---------color de pagina inicio---
 const style = document.documentElement.style;
