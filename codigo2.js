@@ -1,13 +1,10 @@
 // const data = JSON.parse(arraysPrincipales);
-
-const title = document.querySelector("title");
-
-title.innerHTML = data[4][0].nombreTienda;
+console.log(res);
 
 // ---------color de pagina inicio---
 const style = document.documentElement.style;
-console.log(data[4][0].colorPrincipalPagina);
-style.setProperty("--color-primario", data[4][0].colorPrincipalPagina);
+console.log(res[3][1].colorPrincipalPagina);
+style.setProperty("--color-primario", res[3][1].colorPrincipalPagina);
 
 // ---------color de pagina fin---
 
@@ -52,10 +49,12 @@ let b= "";
 
 if (imagenPrincipal.length<=2) {
 	a = imagenPrincipal.substr(0,1);
-	v = imagenPrincipal.substr(-1);
+	q = imagenPrincipal.substr(-1);
+	v=parseInt(q);
 	}else if (imagenPrincipal.length>2) {
 		a = imagenPrincipal.substr(0,1);
-		v = imagenPrincipal.substr(-2);
+		q = imagenPrincipal.substr(-2);
+		v=parseInt(q);
 		}
 
 console.log(a);
@@ -66,75 +65,75 @@ console.log(v);
 	const imagenGrande = document.getElementById("galeria");
 	imagenGrande.innerHTML += 
 			`<div class="img-container11">
-				<img class="foto-descripcion" src="img/${data[0][v].imagen1}" id="foto-descripcion">
+				<img class="foto-descripcion" src="img/${res[0][v+1].imagen1}" id="foto-descripcion">
 			</div>
 				<div class="mini-galeria" id="mini-galeria">					
 				</div>`;
 				const imagenesChicas = document.getElementById("mini-galeria");
 				// for (var i = 0; i < 4; i++) {
-				const imagen1 = `<div><img class="item1" src="img/${data[0][v].imagen1}" id="foto-descripcion-mini"></div>`;
-				const imagen2 = `<div><img class="item1" src="img/${data[0][v].imagen2}" id="foto-descripcion-mini"></div>`;
-				const imagen3 = `<div><img class="item1" src="img/${data[0][v].imagen3}" id="foto-descripcion-mini"></div>`;
-				const imagen4 = `<div><img class="item1" src="img/${data[0][v].imagen4}" id="foto-descripcion-mini"></div>`;
-				const imagen5 = `<div><img class="item1" src="img/${data[0][v].imagen5}" id="foto-descripcion-mini"></div>`;
-				if (data[0][v].imagen5 != "q") {
+				const imagen1 = `<div><img class="item1" src="img/${res[0][v+1].imagen1}" id="foto-descripcion-mini"></div>`;
+				const imagen2 = `<div><img class="item1" src="img/${res[0][v+1].imagen2}" id="foto-descripcion-mini"></div>`;
+				const imagen3 = `<div><img class="item1" src="img/${res[0][v+1].imagen3}" id="foto-descripcion-mini"></div>`;
+				const imagen4 = `<div><img class="item1" src="img/${res[0][v+1].imagen4}" id="foto-descripcion-mini"></div>`;
+				const imagen5 = `<div><img class="item1" src="img/${res[0][v+1].imagen5}" id="foto-descripcion-mini"></div>`;
+				if (res[0][v+1].imagen5 != "q") {
 					imagenesChicas.innerHTML = 
 						 `${imagen1}
 						 ${imagen2}
 						 ${imagen3}
 						 ${imagen4}
 						 ${imagen5}`;
-						}else if (data[0][v].imagen4 != "q") {
+						}else if (res[0][v+1].imagen4 != "q") {
 							imagenesChicas.innerHTML = 
 								 `${imagen1}
 								 ${imagen2}
 								 ${imagen3}
 								 ${imagen4}`;
-						}else if (data[0][v].imagen3 != "q") {
+						}else if (res[0][v+1].imagen3 != "q") {
 							imagenesChicas.innerHTML = 
 								 `${imagen1}
 								 ${imagen2}
 								 ${imagen3}`;
-						}else if (data[0][v].imagen2 != "q") {
+						}else if (res[0][v+1].imagen2 != "q") {
 							imagenesChicas.innerHTML = 
 								 `${imagen1}
 								 ${imagen2}`;
-						}else if (data[0][v].imagen1 != "q") {
+						}else if (res[0][v+1].imagen1 != "q") {
 							imagenesChicas.innerHTML = 
 								 `${imagen1}`;
 						}
 
-const imagenDesc1 = `<div class="descrip vista2"></div>${data[0][v].descripcion1}<img src="img/${data[0][v].imgDescripcion1}" class="imggg descrip2"></img>`;
-const imagenDesc2 = `<div class="descrip vista2"></div>${data[0][v].descripcion2}<img src="img/${data[0][v].imgDescripcion2}" class="imggg descrip2"></img>`;
-const imagenDesc3 = `<div class="descrip vista2"></div>${data[0][v].descripcion3}<img src="img/${data[0][v].imgDescripcion3}" class="imggg descrip2"></img>`;
-const imagenDesc4 = `<div class="descrip vista2"></div>${data[0][v].descripcion4}<img src="img/${data[0][v].imgDescripcion4}" class="imggg descrip2"></img>`;
-const imagenDesc5 = `<div class="descrip vista2"></div>${data[0][v].descripcion5}<img src="img/${data[0][v].imgDescripcion5}" class="imggg descrip2"></img>`;	
+const imagenDesc1 = `<div class="descrip vista2"></div>${res[0][v+1].descripcion1}<img src="img/${res[0][v+1].imgDescripcion1}" class="imggg descrip2"></img>`;
+const imagenDesc2 = `<div class="descrip vista2"></div>${res[0][v+1].descripcion2}<img src="img/${res[0][v+1].imgDescripcion2}" class="imggg descrip2"></img>`;
+const imagenDesc3 = `<div class="descrip vista2"></div>${res[0][v+1].descripcion3}<img src="img/${res[0][v+1].imgDescripcion3}" class="imggg descrip2"></img>`;
+const imagenDesc4 = `<div class="descrip vista2"></div>${res[0][v+1].descripcion4}<img src="img/${res[0][v+1].imgDescripcion4}" class="imggg descrip2"></img>`;
+const imagenDesc5 = `<div class="descrip vista2"></div>${res[0][v+1].descripcion5}<img src="img/${res[0][v+1].imgDescripcion5}" class="imggg descrip2"></img>`;	
 
 const DescripcionImagenes = document.getElementById("descripcion-detallada-especifica");
 
-if (data[0][v].descripcion5 != "q" || data[0][v].imgDescripcion5 != "q") {
+if (res[0][v+1].descripcion5 != "q" || res[0][v+1].imgDescripcion5 != "q") {
 					DescripcionImagenes.innerHTML = 
 						 `${imagenDesc1}
 						 ${imagenDesc2}
 						 ${imagenDesc3}
 						 ${imagenDesc4}
 						 ${imagenDesc5}`;
-						}else if (data[0][v].descripcion4 != "q" && data[0][v].imgDescripcion4 != "q") {
+						}else if (res[0][v+1].descripcion4 != "q" && res[0][v+1].imgDescripcion4 != "q") {
 							DescripcionImagenes.innerHTML = 
 								 `${imagenDesc1}
 								 ${imagenDesc2}
 								 ${imagenDesc3}
 								 ${imagenDesc4}`;
-						}else if (data[0][v].descripcion3 != "q" && data[0][v].imgDescripcion3 != "q") {
+						}else if (res[0][v+1].descripcion3 != "q" && res[0][v+1].imgDescripcion3 != "q") {
 							DescripcionImagenes.innerHTML = 
 								 `${imagenDesc1}
 								 ${imagenDesc2}
 								 ${imagenDesc3}`;
-						}else if (data[0][v].descripcion2 != "q" && data[0][v].imgDescripcion2 != "q") {
+						}else if (res[0][v+1].descripcion2 != "q" && res[0][v+1].imgDescripcion2 != "q") {
 							DescripcionImagenes.innerHTML = 
 								 `${imagenDesc1}
 								 ${imagenDesc2}`;
-						}else if (data[0][v].descripcion1 != "q" && data[0][v].imgDescripcion1 != "q") {
+						}else if (res[0][v+1].descripcion1 != "q" && res[0][v+1].imgDescripcion1 != "q") {
 							DescripcionImagenes.innerHTML = 
 								 `${imagenDesc1}`;
 						}
@@ -306,9 +305,9 @@ btnEnviar.addEventListener("click",(e)=>{
 
 // ------------------------FORMULARIO ESTILOS Y APARICION FIN-------------------
 
+//-----Estilos miniaturas de galeria-I-----
 const mainImg = document.querySelector(".foto-descripcion");
 const thumbnails = document.querySelectorAll(".item1");
-
 
 thumbnails.forEach(thumb =>{
 	thumb.addEventListener("click", function(){
@@ -318,12 +317,12 @@ thumbnails.forEach(thumb =>{
 
 const parrafo = document.getElementById("descripcion-detallada-especifica");
 
-// parrafo.innerHTML = data[0][v].descripcion;
-
 const zeros = n => {
 	if (n.toString().length <2) return "0".concat(n);
 	return n;
 }
+//-----Estilos miniaturas de galeria-FIN-----
+
 
 // --------reloj--------------inicio
 

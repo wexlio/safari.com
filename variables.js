@@ -6,6 +6,10 @@ var textHijoNextHermano = localStorage.getItem("precio");
 var imagenPrincipal  = localStorage.getItem("imagenPrincipal");
 var imagenPrincipal2  = localStorage.getItem("imagenPrincipal2");
 
+var arregloMadre = localStorage.getItem("arregloMadre");
+
+res = JSON.parse(arregloMadre);
+
 var descount = 0.5;
 
 var arraysPrincipales  = localStorage.getItem("arrays11");

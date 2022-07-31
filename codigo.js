@@ -1,140 +1,442 @@
-// let excelcior = document.getElementById("excelcior");
+//----inicio del fecht para traer el objeto de google sheets
+fetch("https://nodewex.azurewebsites.net/api")
+	.then(res=>res.json())
+	.then(res=>mostrarData(res));
 
-// excelcior.addEventListener("click", ()=>{
-// 	location.href = "subirExcel.html";
-// 	excelcior.classList.remo
-// })
+const mostrarData = (res) =>{
+  console.log(res);
+  console.log(res[0][1].nombre);
 
+  
+  // ---------color de pagina inicio---
+  const style = document.documentElement.style;
 
-// const data = JSON.parse(arraysPrincipales);
+  style.setProperty("--color-primario", res[3][1].colorPrincipalPagina);
+  style.setProperty("--valor-portada", res[2].length - 1 + "00%");
 
-// console.log(data[4][0].colorPrincipalPagina);
-// var arraysPrincipales  = localStorage.getItem("arrays11");
+  // ---------color de pagina fin---
 
-const title = document.querySelector("title");
+  // -----------INICIO HEADER IMAGENES PORTADA Y LOGO
+  for (var i = 1; i < res[2].length; i++) {
+    const slider123 = document.getElementById("slider123");
+    slider123.innerHTML += `<div class="slider-seccion" id="slider-seccion">
+		 					<h2 id="titulos-portada">${res[2][i].frasePortada}</h2>
+		 					<img src="img/${res[2][i].imagenNombrePortada}" id="slider-img">
+		 				</div>`;
+  }
 
-title.innerHTML = data[4][0].nombreTienda;
+  const containerSlider = document.getElementById("container-slider");
 
-console.log(data[4][0].colorPrincipalPagina);
-
-// ---------color de pagina inicio---
-const style = document.documentElement.style;
-
-style.setProperty("--color-primario", data[4][0].colorPrincipalPagina);
-style.setProperty("--valor-portada", data[3].length+"00%");
-
-// ---------color de pagina fin---
-
-// -----------INICIO HEADER IMAGENES PORTADA Y LOGO
-for (var i = 0; i < data[3].length; i++) {
-	const slider123 = document.getElementById("slider123");
-	slider123.innerHTML +=
-						`<div class="slider-seccion" id="slider-seccion">
-		 					<h2 id="titulos-portada">${data[3][i].frasePortada}</h2>
-		 					<img src="img/${data[3][i].imagenNombrePortada}" id="slider-img">
-		 				</div>`
-}
-
-const containerSlider = document.getElementById("container-slider");
-
-containerSlider.innerHTML += `
+  containerSlider.innerHTML += `
 			 		<div class="slider-boton slider-boton-derecha" id="slider-boton-derecha">&#62</div>
 		 			<div class="slider-boton slider-boton-izquierda" id="slider-boton-izquierda">&#60</div>`;
 
-const header = document.getElementById("header");
+  const header = document.getElementById("header");
 
-	header.innerHTML += `
+  header.innerHTML += `
 
 		<div class="logo-principal">
 
 		 	<div class="grid-item">
-		 		<img src="img/${data[4][0].nombreImagenLogo}" id="logo">
+		 		<img src="img/${res[3][1].nombreImagenLogo}" id="logo">
 		 	</div>
 
 		 	<div class="grid-item" id="caja3">
-		 		<h4 class="nombre-tienda">${data[4][0].nombreTienda}</h4>
+		 		<h4 class="nombre-tienda">${res[3][1].nombreTienda}</h4>
 
 		 		<div id="coñaso">
-			 		<img src="img/${data[4][0].nombreImgSlogan}" id="what">
-			 		<p class="bbb">${data[4][0].slogan}</p>	 				
+			 		<img src="img/${res[3][1].nombreImgSlogan}" id="what">
+			 		<p class="bbb">${res[3][1].slogan}</p>	 				
 		 		</div>
 		 	</div>
-		</div>	`	
+		</div>	`;
+
+  // -----------fiN PORTADA LOGO HEADER
+
+  //----CATEGORIAS
+
+  for (var i = 1; i < res[1].length; i++) {
+    const aside = document.getElementById("aside");
+    aside.style.gridTemplateColumns = "repeat(k, 100px)";
+    aside.innerHTML += `<div class="">
+			<img class="categoria ${res[1][i].categoria} ${i}" src="img/${
+      res[1][i].nombreImagenCategoria
+    }" id="categotia${i + 1}">
+			<h6>${res[1][i].categoria}</h6>
+	</div>`;
+  }
+  // -------------------categorias fiN------------------
+
+  // ----Mostrar primeros productos i
+  let a = 1;
+  for (var i = 1; i < res[0].length; i++) {
+    const main = document.getElementById("main");
+    if (res[0][i].categoria === res[1][1].categoria) {
+      main.innerHTML += `<div class="hover ordenar-altura" value="producto${a}${
+        i - 1 + 1
+      }" id="fotos">
+				<div class="slider" id="fotos">
+					<img class="${a - 1}${i - 1} redirect imgs ostia img/${
+        res[0][i].imagen1
+      }" src="img/${res[0][i].imagen1}" id="redirect">
+						<div class="liga-descuento"></div>
+				</div>	
+				<p class="${a - 1}${i - 1} redirect pila ostia" id="redirect">${
+        res[0][i].nombre
+      }</p>
+				<b class="flexito redirect" id="redirect">
+					<h4 class="precio${i - 1 + 1} redirect" id="redirect">S/. ${
+        res[0][i].precio
+      }.00</h4>
+					<button class="boton111 0${i - 1} img/${res[0][i].imagen1}" type="button${
+        i - 1 + 1
+      }">Ver detalles</button>
+				</b>	
+			</div>`;
+    } else {
+      null;
+    }
+  }
+  // ------F-----
+  // -------iNICIO SLIDER PORTADA-----
+
+  const slider123 = document.querySelector("#slider123");
+  let sliderSection = document.querySelectorAll(".slider-seccion");
+  let sliderSectionLast = sliderSection[sliderSection.length - 1];
+
+  const btnIzquierda = document.querySelector("#slider-boton-izquierda");
+  const btnDerecha = document.querySelector("#slider-boton-derecha");
+
+  slider123.insertAdjacentElement("afterbegin", sliderSectionLast);
+
+  function Next() {
+    let sliderSectionFirts = document.querySelectorAll(".slider-seccion")[0];
+    slider123.style.marginLeft = "-200%";
+    slider123.style.transition = "all 0.5s";
+    setTimeout(function () {
+      slider123.style.transition = "none";
+      slider123.insertAdjacentElement("beforeend", sliderSectionFirts);
+      slider123.style.marginLeft = "-100%";
+    }, 500);
+  }
+
+  function Prev() {
+    let sliderSection = document.querySelectorAll(".slider-seccion");
+    let sliderSectionLast = sliderSection[sliderSection.length - 1];
+    slider123.style.marginLeft = "0";
+    slider123.style.transition = "all 0.5s";
+    setTimeout(function () {
+      slider123.style.transition = "none";
+      slider123.insertAdjacentElement("afterbegin", sliderSectionLast);
+      slider123.style.marginLeft = "-100%";
+    }, 500);
+  }
+
+  btnDerecha.addEventListener("click", function () {
+    Next();
+  });
+
+  btnIzquierda.addEventListener("click", function () {
+    Prev();
+  });
+
+  setInterval(function () {
+    Prev();
+  }, 6000);
+
+  // console.log(data[0].length);
+
+  // -------FIN SLIDER PORTADA-----
+
+  //-----MANDAR A SUBPAGINA DETALLES DE PRODUCTOS-------
+
+  window.addEventListener("click", function (e) {
+    console.log(e.target);
+    let z = e.target;
+    const v = z.classList.item(0);
+    const tt = z.classList.item(1);
+    const yy = z.classList.item(2);
+
+    let cerrar = document.querySelectorAll(".cerrar-modal")[0];
+    let abrir = document.querySelectorAll(".boton")[0];
+    let modal = document.querySelectorAll(".modal")[0];
+    let modalC = document.querySelectorAll(".modal-container")[0];
+    let btnEnviar = document.getElementById("btn-enviar11");
+    console.log(btnEnviar);
+
+    if (v === "boton111") {
+      localStorage.setItem("imagenPrincipal", tt);
+      localStorage.setItem("imagenPrincipal2", yy);
+
+      location.href = "form.html";
+    }
+  });
+
+  //-----MANDAR A SUBPAGINA DETALLES DE PRODUCTOS FIN----
+
+  //---CREACION DE PRODUCTOS DINAMICOS POR CATEGORIA I----
+  const fragmento = document.createDocumentFragment();
+  const main = document.getElementById("main");
+  function Borrar() {
+    const main = document.getElementById("main");
+    const fragmento = document.createDocumentFragment();
+    const hijos = main.children;
+
+    let hijo = "";
+    for (hijo of hijos) {
+      console.log(hijo);
+      hijo.remove();
+    }
+
+    for (hijo of hijos) {
+      console.log(hijo);
+      hijo.remove();
+    }
+
+    for (hijo of hijos) {
+      console.log(hijo);
+      hijo.remove();
+    }
+
+    for (hijo of hijos) {
+      console.log(hijo);
+      hijo.remove();
+    }
+
+    for (hijo of hijos) {
+      console.log(hijo);
+      hijo.remove();
+    }
+  }
+
+  window.addEventListener("click", function (e) {
+    console.log(e.target);
+    let x = e.target;
+    const y = x.classList.item(0);
+    console.log(x);
+    console.log(y);
+    const main = document.getElementById("main");
+    var divs = main.getElementsByTagName("div");
+    console.log(divs.length);
+    if (y == "categoria") {
+      const a = x.classList.item(1);
+      const b = x.classList.item(2);
+      console.log(a);
+      console.log(b);
+
+      Borrar();
+
+      for (var i = 1; i < res[0].length; i++) {
+        const item = document.createElement("P");
+        if (res[0][i].categoria == a) {
+          item.innerHTML += `<div class="hover ordenar-altura" value="producto${a}${
+            i - 1 + 1
+          }" id="fotos">
+							<div class="slider" id="fotos">
+								<img class="${b}${i - 1} redirect imgs ostia img/${
+            res[0][i].imagen1
+          }" src="img/${res[0][i].imagen1}" id="redirect">
+									<div class="liga-descuento"></div>
+							</div>	
+							<p class="${b}${i - 1} redirect pila ostia" id="redirect">${
+            res[0][i].nombre
+          }</p>
+							<b class="flexito redirect" id="redirect">
+								<h4 class="precio${i - 1 + 1} redirect" id="redirect">S/. ${
+            res[0][i].precio
+          }.00</h4>
+								<button class="boton111 0${i - 1} img/${res[0][i].imagen1}" type="button${
+            i + 1
+          }">Ver detalles</button>
+							</b>	
+						</div>`;
+          fragmento.appendChild(item);
+        }
+        main.appendChild(fragmento);
+      }
+    }
+  });
+
+  //---CREACION DE PRODUCTOS DINAMICOS POR CATEGORIA FIN----
+
+  //----ENVIO A DETALLE DE PRODUCTOS I----
+
+  window.addEventListener("click", function (e) {
+    console.log(e.target);
+    let select = e.target;
+    const classSelect1 = select.classList.item(1);
+    console.log(classSelect1);
+
+    const classSelect2 = select.classList.item(2);
+    console.log(classSelect2);
+
+    const classSelect3 = select.classList.item(0);
+    console.log(classSelect3);
+
+    const classSelect4 = select.classList.item(4);
+    console.log(classSelect4);
+
+    if (classSelect1 == "redirect") {
+      if (classSelect2 == "pila") {
+        var nextHermano = select.nextElementSibling;
+        var hijoNextHermano = nextHermano.firstElementChild;
+        localStorage.setItem("imagenPrincipal", classSelect3);
+        localStorage.setItem("imagenPrincipal2", classSelect4);
+        localStorage.setItem("producto", select.textContent);
+        localStorage.setItem("precio", hijoNextHermano.textContent);
+
+        // console.log(hijoNextHermano.textContent.substr(3));
+        location.href = "form.html";
+      } else if (classSelect2 == "imgs") {
+        var padreSelect = select.parentElement;
+        var hermanoPadreSelect = padreSelect.nextElementSibling;
+        var hermano2HermanoPadreSelect = hermanoPadreSelect.nextElementSibling;
+        var hijoHermano2HermanoPadreSelect =
+          hermano2HermanoPadreSelect.firstElementChild;
+        localStorage.setItem("imagenPrincipal", classSelect3);
+        localStorage.setItem("imagenPrincipal2", classSelect4);
+        localStorage.setItem("producto", hermanoPadreSelect.textContent);
+        localStorage.setItem(
+          "precio",
+          hijoHermano2HermanoPadreSelect.textContent
+        );
+
+        location.href = "form.html";
+      }
+    }
+
+    localStorage.setItem("arregloMadre", JSON.stringify(res))
+
+  });
+
+  //----ENVIO A DETALLE DE PRODUCTOS FIN----
+
+//----FIN DE FIN----
+}
+
+
+// console.log(data[4][0].colorPrincipalPagina);
+
+
+
+// ---------color de pagina inicio---
+// const style = document.documentElement.style;
+
+// style.setProperty("--color-primario", data[4][0].colorPrincipalPagina);
+// style.setProperty("--valor-portada", data[3].length+"00%");
+
+// ---------color de pagina fin---
+
+// -----------INICIO HEADER IMAGENES PORTADA Y LOGO
+// for (var i = 0; i < data[3].length; i++) {
+// 	const slider123 = document.getElementById("slider123");
+// 	slider123.innerHTML +=
+// 						`<div class="slider-seccion" id="slider-seccion">
+// 		 					<h2 id="titulos-portada">${data[3][i].frasePortada}</h2>
+// 		 					<img src="img/${data[3][i].imagenNombrePortada}" id="slider-img">
+// 		 				</div>`
+// }
+
+// const containerSlider = document.getElementById("container-slider");
+
+// containerSlider.innerHTML += `
+// 			 		<div class="slider-boton slider-boton-derecha" id="slider-boton-derecha">&#62</div>
+// 		 			<div class="slider-boton slider-boton-izquierda" id="slider-boton-izquierda">&#60</div>`;
+
+// const header = document.getElementById("header");
+
+// 	header.innerHTML += `
+
+// 		<div class="logo-principal">
+
+// 		 	<div class="grid-item">
+// 		 		<img src="img/${data[4][0].nombreImagenLogo}" id="logo">
+// 		 	</div>
+
+// 		 	<div class="grid-item" id="caja3">
+// 		 		<h4 class="nombre-tienda">${data[4][0].nombreTienda}</h4>
+
+// 		 		<div id="coñaso">
+// 			 		<img src="img/${data[4][0].nombreImgSlogan}" id="what">
+// 			 		<p class="bbb">${data[4][0].slogan}</p>	 				
+// 		 		</div>
+// 		 	</div>
+// 		</div>	`	
 
 // -----------fiN PORTADA LOGO HEADER
 
 //----CATEGORIAS
-var k = data[2].length;
+// var k = data[2].length;
 
-for (var i = 0; i < k; i++) {
-	const aside = document.getElementById("aside");
-	aside.style.gridTemplateColumns = "repeat(k, 100px)";
-	aside.innerHTML += 
-	`<div class="">
-			<img class="categoria ${data[2][i].categoria} ${i}" src="img/${data[2][i].nombreImagenCategoria}" id="categotia${i+1}">
-			<h6>${data[2][i].categoria}</h6>
-	</div>`
-}
+// for (var i = 0; i < k; i++) {
+// 	const aside = document.getElementById("aside");
+// 	aside.style.gridTemplateColumns = "repeat(k, 100px)";
+// 	aside.innerHTML += 
+// 	`<div class="">
+// 			<img class="categoria ${data[2][i].categoria} ${i}" src="img/${data[2][i].nombreImagenCategoria}" id="categotia${i+1}">
+// 			<h6>${data[2][i].categoria}</h6>
+// 	</div>`
+// }
 // -------------------categorias fiN------------------
 
 //---------------producos iniciales------
-console.log(data[2][0].categoria);
-console.log(data[0].length);
-let a = 1;
-for (var i = 0; i < data[0].length; i++) {
-	const main = document.getElementById("main");
-	if (data[0][i].categoria === data[2][0].categoria) {
-		main.innerHTML += 
-			`<div class="hover ordenar-altura" value="producto${a}${i+1}" id="fotos">
-				<div class="slider" id="fotos">
-					<img class="${a-1}${i} redirect imgs ostia img/${data[0][i].imagen1}" src="img/${data[0][i].imagen1}" id="redirect">
-						<div class="liga-descuento"></div>
-				</div>	
-				<p class="${a-1}${i} redirect pila ostia" id="redirect">${data[0][i].nombre}</p>
-				<b class="flexito redirect" id="redirect">
-					<h4 class="precio${i+1} redirect" id="redirect">S/. ${data[0][i].precio}.00</h4>
-					<button class="boton111 0${i} img/${data[0][i].imagen1}" type="button${i+1}">Ver detalles</button>
-				</b>	
-			</div>`
-	} else {
-		null;
-	}
+// console.log(data[2][0].categoria);
+// console.log(data[0].length);
+// let a = 1;
+// for (var i = 0; i < data[0].length; i++) {
+// 	const main = document.getElementById("main");
+// 	if (data[0][i].categoria === data[2][0].categoria) {
+// 		main.innerHTML += 
+// 			`<div class="hover ordenar-altura" value="producto${a}${i+1}" id="fotos">
+// 				<div class="slider" id="fotos">
+// 					<img class="${a-1}${i} redirect imgs ostia img/${data[0][i].imagen1}" src="img/${data[0][i].imagen1}" id="redirect">
+// 						<div class="liga-descuento"></div>
+// 				</div>	
+// 				<p class="${a-1}${i} redirect pila ostia" id="redirect">${data[0][i].nombre}</p>
+// 				<b class="flexito redirect" id="redirect">
+// 					<h4 class="precio${i+1} redirect" id="redirect">S/. ${data[0][i].precio}.00</h4>
+// 					<button class="boton111 0${i} img/${data[0][i].imagen1}" type="button${i+1}">Ver detalles</button>
+// 				</b>	
+// 			</div>`
+// 	} else {
+// 		null;
+// 	}
 	
-}
+// }
 
 //---------------producos iniciales fin------
 
 
 //------------modal-----inicio----------------------
-function scrollToTop(){
-	window.scrollTo(0,0);
-}
+// function scrollToTop(){
+// 	window.scrollTo(0,0);
+// }
 
-window.addEventListener("click", function(e){
-	console.log(e.target);
-	let z = e.target;
-	const v = z.classList.item(0);
-	const tt = z.classList.item(1);
-	const yy = z.classList.item(2);
-	console.log(v);
-	console.log(k);
-	let cerrar = document.querySelectorAll(".cerrar-modal")[0];
-let abrir = document.querySelectorAll(".boton")[0];
-let modal = document.querySelectorAll(".modal")[0];
-let modalC = document.querySelectorAll(".modal-container")[0];
-let btnEnviar = document.getElementById("btn-enviar11");
-console.log(btnEnviar);
+// window.addEventListener("click", function(e){
+// 	console.log(e.target);
+// 	let z = e.target;
+// 	const v = z.classList.item(0);
+// 	const tt = z.classList.item(1);
+// 	const yy = z.classList.item(2);
+// 	console.log(v);
+// 	console.log(k);
+// 	let cerrar = document.querySelectorAll(".cerrar-modal")[0];
+// let abrir = document.querySelectorAll(".boton")[0];
+// let modal = document.querySelectorAll(".modal")[0];
+// let modalC = document.querySelectorAll(".modal-container")[0];
+// let btnEnviar = document.getElementById("btn-enviar11");
+// console.log(btnEnviar);
 	
 
-	if (v === "boton111") {
+// 	if (v === "boton111") {
 
-		localStorage.setItem("imagenPrincipal", tt);
-		localStorage.setItem("imagenPrincipal2", yy);
+// 		localStorage.setItem("imagenPrincipal", tt);
+// 		localStorage.setItem("imagenPrincipal2", yy);
 
-		location.href = "form.html";
+// 		location.href = "form.html";
 
-	}
-
+// 	}
+//---------LO DE ABAJO YA NO VA PORQUE NO HAY FORMULARIO------
 // 	if (v === "boton111") {
 // 		const padre = z.parentElement;
 // 		console.log(padre);
@@ -313,139 +615,135 @@ console.log(btnEnviar);
 // 				modal.classList.toggle("modal-close");
 // 		}  borré para que no llene formlario desde la pag principal sino desde el detalle del producto
 
-})
-const fragmento = document.createDocumentFragment();
-const main = document.getElementById("main");
-function Borrar(){
-			const main = document.getElementById("main");
-			const fragmento = document.createDocumentFragment();
-			const hijos = main.children;
+//---CREACION DE PRODUCTOS DINAMICOS POR CATEGORIA I----
+// const fragmento = document.createDocumentFragment();
+// const main = document.getElementById("main");
+// function Borrar(){
+// 			const main = document.getElementById("main");
+// 			const fragmento = document.createDocumentFragment();
+// 			const hijos = main.children;
 
-			let hijo="";
-			for(hijo of hijos){
-			console.log(hijo);
-			hijo.remove();
-			}
+// 			let hijo="";
+// 			for(hijo of hijos){
+// 			console.log(hijo);
+// 			hijo.remove();
+// 			}
 
-			for(hijo of hijos){
-			console.log(hijo);
-			hijo.remove();
-			}
+// 			for(hijo of hijos){
+// 			console.log(hijo);
+// 			hijo.remove();
+// 			}
 
-			for(hijo of hijos){
-			console.log(hijo);
-			hijo.remove();
-			}
+// 			for(hijo of hijos){
+// 			console.log(hijo);
+// 			hijo.remove();
+// 			}
 
-			for(hijo of hijos){
-			console.log(hijo);
-			hijo.remove();
-			}
+// 			for(hijo of hijos){
+// 			console.log(hijo);
+// 			hijo.remove();
+// 			}
 
-			for(hijo of hijos){
-			console.log(hijo);
-			hijo.remove();
-			}
+// 			for(hijo of hijos){
+// 			console.log(hijo);
+// 			hijo.remove();
+// 			}
 
-}
+// }
 
-// console.log(categorias[0]);
+// window.addEventListener("click", function(e){
+// 	console.log(e.target);
+// 	let x = e.target;
+// 	const y = x.classList.item(0);
+// 	console.log(x);
+// 	console.log(y);
+// 		const main = document.getElementById("main");
+// 			var divs = main.getElementsByTagName("div");
+// 			console.log(divs.length);
+// 	if (y == "categoria") {
+// 		const a = x.classList.item(1);
+// 		const b = x.classList.item(2);
+// 		console.log(a);
+// 		console.log(b);
 
-window.addEventListener("click", function(e){
-	console.log(e.target);
-	let x = e.target;
-	const y = x.classList.item(0);
-	console.log(x);
-	console.log(y);
-		const main = document.getElementById("main");
-			var divs = main.getElementsByTagName("div");
-			console.log(divs.length);
-	if (y == "categoria") {
-		const a = x.classList.item(1);
-		const b = x.classList.item(2);
-		console.log(a);
-		console.log(b);
+// 			Borrar();
 
-			Borrar();
-
-			console.log(data[2][parseInt(b)].categoria);
-
-			// if( a <= productos.length ) {
-
+// 			console.log(data[2][parseInt(b)].categoria);
 			
-				for (var i = 0; i < data[0].length; i++) {				
-						const item = document.createElement("P");
-					if (data[0][i].categoria == a) {
-						// prompt("hola");
-						item.innerHTML += 
-						`<div class="hover ordenar-altura" value="producto${a}${i+1}" id="fotos">
-							<div class="slider" id="fotos">
-								<img class="${b}${i} redirect imgs ostia img/${data[0][i].imagen1}" src="img/${data[0][i].imagen1}" id="redirect">
-									<div class="liga-descuento"></div>
-							</div>	
-							<p class="${b}${i} redirect pila ostia" id="redirect">${data[0][i].nombre}</p>
-							<b class="flexito redirect" id="redirect">
-								<h4 class="precio${i+1} redirect" id="redirect">S/. ${data[0][i].precio}.00</h4>
-								<button class="boton111 0${i} img/${data[0][i].imagen1}" type="button${i+1}">Ver detalles</button>
-							</b>	
-						</div>`;
-					fragmento.appendChild(item);
+// 				for (var i = 0; i < data[0].length; i++) {				
+// 						const item = document.createElement("P");
+// 					if (data[0][i].categoria == a) {
+// 						// prompt("hola");
+// 						item.innerHTML += 
+// 						`<div class="hover ordenar-altura" value="producto${a}${i+1}" id="fotos">
+// 							<div class="slider" id="fotos">
+// 								<img class="${b}${i} redirect imgs ostia img/${data[0][i].imagen1}" src="img/${data[0][i].imagen1}" id="redirect">
+// 									<div class="liga-descuento"></div>
+// 							</div>	
+// 							<p class="${b}${i} redirect pila ostia" id="redirect">${data[0][i].nombre}</p>
+// 							<b class="flexito redirect" id="redirect">
+// 								<h4 class="precio${i+1} redirect" id="redirect">S/. ${data[0][i].precio}.00</h4>
+// 								<button class="boton111 0${i} img/${data[0][i].imagen1}" type="button${i+1}">Ver detalles</button>
+// 							</b>	
+// 						</div>`;
+// 					fragmento.appendChild(item);
 
-					}
-					main.appendChild(fragmento);
-				}
-			// } 
-			// else {
-			// 	return null;
-			// }
-	}
-})
+// 					}
+// 					main.appendChild(fragmento);
+// 				}
+// 	}
+// })
+
+//---CREACION DE PRODUCTOS DINAMICOS POR CATEGORIA FIN----
 
 
-window.addEventListener("click", function(e){
-		console.log(e.target);
-		let select = e.target;
-		const classSelect1 = select.classList.item(1);
-		console.log(classSelect1);
+//----ENVIO A DETALLE DE PRODUCTOS I----
 
-		const classSelect2 = select.classList.item(2);
-		console.log(classSelect2);
+// window.addEventListener("click", function(e){
+// 		console.log(e.target);
+// 		let select = e.target;
+// 		const classSelect1 = select.classList.item(1);
+// 		console.log(classSelect1);
 
-		const classSelect3 = select.classList.item(0);
-		console.log(classSelect3);
+// 		const classSelect2 = select.classList.item(2);
+// 		console.log(classSelect2);
 
-		const classSelect4 = select.classList.item(4);
-		console.log(classSelect4);
+// 		const classSelect3 = select.classList.item(0);
+// 		console.log(classSelect3);
 
-		if (classSelect1 == "redirect") {
+// 		const classSelect4 = select.classList.item(4);
+// 		console.log(classSelect4);
 
-			if (classSelect2 == "pila") {
-				var nextHermano = select.nextElementSibling;
-				var hijoNextHermano = nextHermano.firstElementChild;
-localStorage.setItem("imagenPrincipal", classSelect3);
-localStorage.setItem("imagenPrincipal2", classSelect4);
-				localStorage.setItem("producto", select.textContent);
-				localStorage.setItem("precio", hijoNextHermano.textContent);
+// 		if (classSelect1 == "redirect") {
 
-// console.log(hijoNextHermano.textContent.substr(3));
-				location.href = "form.html";
-			} 
-			else if(classSelect2 == "imgs"){    
-				var padreSelect = select.parentElement;
-				var hermanoPadreSelect = padreSelect.nextElementSibling;
-				var hermano2HermanoPadreSelect = hermanoPadreSelect.nextElementSibling;
-				var hijoHermano2HermanoPadreSelect = hermano2HermanoPadreSelect.firstElementChild;
-localStorage.setItem("imagenPrincipal", classSelect3);
-localStorage.setItem("imagenPrincipal2", classSelect4);
-				localStorage.setItem("producto", hermanoPadreSelect.textContent);
-				localStorage.setItem("precio", hijoHermano2HermanoPadreSelect.textContent);
+// 			if (classSelect2 == "pila") {
+// 				var nextHermano = select.nextElementSibling;
+// 				var hijoNextHermano = nextHermano.firstElementChild;
+// localStorage.setItem("imagenPrincipal", classSelect3);
+// localStorage.setItem("imagenPrincipal2", classSelect4);
+// 				localStorage.setItem("producto", select.textContent);
+// 				localStorage.setItem("precio", hijoNextHermano.textContent);
 
-// console.log(hijoHermano2HermanoPadreSelect.textContent.substr(3));
-				location.href = "form.html";
-			}
-		}
+// // console.log(hijoNextHermano.textContent.substr(3));
+// 				location.href = "form.html";
+// 			} 
+// 			else if(classSelect2 == "imgs"){    
+// 				var padreSelect = select.parentElement;
+// 				var hermanoPadreSelect = padreSelect.nextElementSibling;
+// 				var hermano2HermanoPadreSelect = hermanoPadreSelect.nextElementSibling;
+// 				var hijoHermano2HermanoPadreSelect = hermano2HermanoPadreSelect.firstElementChild;
+// localStorage.setItem("imagenPrincipal", classSelect3);
+// localStorage.setItem("imagenPrincipal2", classSelect4);
+// 				localStorage.setItem("producto", hermanoPadreSelect.textContent);
+// 				localStorage.setItem("precio", hijoHermano2HermanoPadreSelect.textContent);
+
+// 				location.href = "form.html";
+// 			}
+// 		}
 		
-})
+// })
+
+//----ENVIO A DETALLE DE PRODUCTOS FIN----
 // console.log(textHijoNextHermano.substr(3));
 
 // const imagenWhatsapp = document.querySelector(".imagen-para-whats")
@@ -455,49 +753,49 @@ localStorage.setItem("imagenPrincipal2", classSelect4);
 // })
 // -------iNICIO SLIDER PORTADA-----
 
-const slider123 = document.querySelector("#slider123");
-let sliderSection = document.querySelectorAll(".slider-seccion");
-let sliderSectionLast = sliderSection[sliderSection.length-1];
+// const slider123 = document.querySelector("#slider123");
+// let sliderSection = document.querySelectorAll(".slider-seccion");
+// let sliderSectionLast = sliderSection[sliderSection.length-1];
 
-const btnIzquierda = document.querySelector("#slider-boton-izquierda");
-const btnDerecha = document.querySelector("#slider-boton-derecha");
+// const btnIzquierda = document.querySelector("#slider-boton-izquierda");
+// const btnDerecha = document.querySelector("#slider-boton-derecha");
 
-slider123.insertAdjacentElement("afterbegin", sliderSectionLast);
+// slider123.insertAdjacentElement("afterbegin", sliderSectionLast);
 
-function Next() {
-	let sliderSectionFirts = document.querySelectorAll(".slider-seccion")[0];
-	slider123.style.marginLeft = "-200%";
-	slider123.style.transition = "all 0.5s";
-	setTimeout(function(){
-		slider123.style.transition = "none";
-		slider123.insertAdjacentElement("beforeend", sliderSectionFirts);
-		slider123.style.marginLeft = "-100%";
-	}, 500);
-}
+// function Next() {
+// 	let sliderSectionFirts = document.querySelectorAll(".slider-seccion")[0];
+// 	slider123.style.marginLeft = "-200%";
+// 	slider123.style.transition = "all 0.5s";
+// 	setTimeout(function(){
+// 		slider123.style.transition = "none";
+// 		slider123.insertAdjacentElement("beforeend", sliderSectionFirts);
+// 		slider123.style.marginLeft = "-100%";
+// 	}, 500);
+// }
 
-function Prev() {
-	let sliderSection = document.querySelectorAll(".slider-seccion");
-	let sliderSectionLast = sliderSection[sliderSection.length-1];
-	slider123.style.marginLeft = "0";
-	slider123.style.transition = "all 0.5s";
-	setTimeout(function(){
-		slider123.style.transition = "none";
-		slider123.insertAdjacentElement("afterbegin", sliderSectionLast);
-		slider123.style.marginLeft = "-100%";
-	}, 500);
-}
+// function Prev() {
+// 	let sliderSection = document.querySelectorAll(".slider-seccion");
+// 	let sliderSectionLast = sliderSection[sliderSection.length-1];
+// 	slider123.style.marginLeft = "0";
+// 	slider123.style.transition = "all 0.5s";
+// 	setTimeout(function(){
+// 		slider123.style.transition = "none";
+// 		slider123.insertAdjacentElement("afterbegin", sliderSectionLast);
+// 		slider123.style.marginLeft = "-100%";
+// 	}, 500);
+// }
 
-btnDerecha.addEventListener("click", function(){
-	Next();
-})
+// btnDerecha.addEventListener("click", function(){
+// 	Next();
+// })
 
-btnIzquierda.addEventListener("click", function(){
-	Prev();
-})
+// btnIzquierda.addEventListener("click", function(){
+// 	Prev();
+// })
 
-setInterval(function(){
-	Prev();
-}, 6000);
+// setInterval(function(){
+// 	Prev();
+// }, 6000);
 
 // console.log(data[0].length);
 
