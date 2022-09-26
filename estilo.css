@@ -4,6 +4,7 @@
 	font-family: 'Lato', sans-serif;
 		/*box-sizing: border-box;*/
 	box-sizing: border-box;
+	/* overflow-y: scroll !important; */
 	}
 
 :root{
@@ -23,7 +24,7 @@ body{
 	/*padding-top: 20px;*/
 	/*background: #aaa;*/
 	/*text-align: center;*/
-	/*overflow-x: hidden;*/
+	/* overflow-x: scroll; */
 /*	min-width: fit-content;
 	margin: 0 auto;*/
 	/*position: absolute;
@@ -89,6 +90,7 @@ header{
 #container-slider{
 	width: 100%;
 	max-width: 1024px;
+	height: 250px;
 	margin: 0 auto;
 	overflow: hidden;
 	position: relative;
@@ -96,7 +98,7 @@ header{
 }
 
 #slider123{
-	height: 200px;
+	height: 100% !important;
 	width: var(--valor-portada);
 	display: flex;
 	margin-left: -100%;
@@ -104,11 +106,11 @@ header{
 
 #slider-seccion{
 	width: 100%;
-
+	height: 200px !important;
 }
 
 #slider-img{
-	margin-top: -30px;
+	margin-top: -60px;
 	display: block;
 	width: 100%;
 	height: 100%;
@@ -116,7 +118,12 @@ header{
 }
 
 .slider-boton{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-self: center;
 	position: absolute;
+	margin-top: -35px;
 	width: 28px;
 	height: 28px;
 	background: rgba(255,255,255,0.5);
@@ -130,6 +137,10 @@ header{
 	/*position: relative;*/
 	z-index: 20;
 	color: rgba(0,0,0,0.5);
+}
+
+.boton111{
+	margin-top: 7px;
 }
 
 .slider-boton:hover{
@@ -151,12 +162,14 @@ header{
 	text-align: center;
 	top: 50%;
 	transform: translate(0%, -50%);
-	color: #fff;
-	/*background-color: rgba(255,255,255,0.3);*/
+	color: rgb(255, 255, 255);
+	background-color: rgba(0,0,0,0.3);
+	border-radius: 10px;
 	width: 200px !important;
 	min-width: fit-content;
 	margin: 0 auto;
 	/*-webkit-text-stroke: 0.02px black;*/
+	font-weight:600;
 }
 /*-----------------logo-----*/
 #logo{
@@ -168,22 +181,28 @@ header{
 	border-radius: 10px;
 	border: 0px solid transparent;
 	box-shadow: 0.8px 0.8px 9px;
+	object-fit: cover;
 }
 
 #coñaso{
 	display: flex;
 	margin-left: 5px;
 	margin-top: 0px;
+	object-fit: cover;
 }
 
 .bbb{
 	font-size: 13px;
+	object-fit: cover;
 }
 
 .nombre-tienda{
 	font-size: 23px;
 	margin-left: 10px;
 	margin-top: 2px;
+	object-fit: cover;
+	position: relative;
+	z-index: 100000;
 }
 
 #what{
@@ -194,7 +213,7 @@ header{
 
 .logo-principal{
 	display: flex;
-
+	margin-top: -55px;
 }
 
 /*----fin logo----------*/
@@ -332,6 +351,7 @@ main{
 	border-top-left-radius: 8px;
 	border-bottom-right-radius: 8px;
 	border-bottom-left-radius: 8px;
+	margin-top: 7px;
 }
 
 #redirect{
@@ -344,6 +364,9 @@ main{
 	border-top-left-radius: 8px;
 	border-bottom-right-radius: none;
 	border-bottom-left-radius: none;
+	margin-top: -7px;
+	/* font-size: 1.2rem; */
+	font-weight:600;
 }
 
 
@@ -358,8 +381,8 @@ main{
 .pila{
 	background: #fff;
 	padding: 0px 5px 0 5px;
-	margin-top: 5px !important;
-	margin-bottom: 0 !important;
+	margin-top: -6px !important;
+	margin-bottom: 0px !important;
 	margin-right: 0px !important;
 	margin-left: 0px !important;
 	max-height: 27px;
@@ -370,6 +393,7 @@ main{
 	text-overflow: ellipsis;
 	white-space: nowrap;
 	overflow: hidden;
+	font-weight:600;
 }
 
 .flexito{
@@ -385,6 +409,7 @@ main{
 	border-radius: 8px;
 	border-bottom-right-radius: 8px !important;
 	border-bottom-left-radius: 8px !important;
+	margin-top: 4px !important;
 }
 
 main div b h4{
@@ -982,7 +1007,7 @@ form div img {
 	/*height: 100%;*/
 	gap: 10px;
 	flex-wrap: nowrap;
-	overflow-y: scroll;
+	overflow: scroll;
 	justify-content: left;
 	align-items: left;
 	object-fit: cover;
@@ -1053,6 +1078,7 @@ form div img {
 #gordon{
 	position: relative;
 	z-index: 1;
+	margin-top: 54px;
 }
 
 .disclaimer{
@@ -1073,3 +1099,239 @@ form div img {
 	transform: translateY(-9000000%);
 }
 
+/* estilos details products */
+
+.container-delatils-products{
+	display: grid;
+	grid-template-columns: 350px;
+	grid-template-rows: auto-fill;
+	justify-content: center;
+	justify-items: center;
+	color:#0ca;
+	overflow-x: hidden;
+	overflow-y: scroll;
+}
+
+.grids{
+	text-align: s;
+}
+
+.container-images{
+	/* display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	align-content: center; */
+	width: 100%;
+	max-height: 100%;
+	overflow-x: hidden;
+	overflow-y: scroll;
+	margin: auto;
+}
+
+.image-principal{
+	width: 350px;
+	height: 400px;
+	
+}
+
+.image-secondary{
+	display: flex;
+	height: 70px;
+	width: 350px;
+	/*height: 100%;*/
+	gap: 10px;
+	/* flex-wrap: nowrap; */
+	/* overflow-x: scroll; */
+	justify-content: left;
+	align-items: left;
+	object-fit: cover;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	margin-left: auto;
+	margin-right: auto;
+	/* position: relative;
+	z-index: 5; */
+}
+
+.img-sec{
+	border-radius: 10px;
+	min-width: 80px;
+	object-fit: cover;
+}
+
+.imagen1{
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	border-radius: 7px !important;
+}
+
+.container-descriptions{
+	text-align: center;
+	/* margin-left: -200px; */
+}
+
+
+.container-subdetails{
+	min-width: 100%;
+}
+
+#preciasos{
+	display: flex;
+	
+}
+
+.prec{
+	margin-right: 20px;
+	margin-top: 10px;
+	margin-bottom: 0px;
+	font-weight:800;
+}
+
+/* personas mirando acmbiante  */
+
+.personas-mirando-cambiante{
+	margin: 20px 0 10px 0;
+	border: 1px solid transparent;
+	background: #fff;
+	border-radius: 7px;
+	padding: 10px;
+	max-width: 100%;
+	text-align: left;
+}
+
+/*--inicio-reloj---*/
+
+.relojero{
+	text-align: center;
+	margin: 10px 0 10px 0;
+}
+
+.reloj{
+	display: flex;
+	flex-wrap: nowrap;
+	justify-content: center;
+	align-items: center;
+	margin-bottom: 20px;
+}
+
+.hora, .min, .seg{
+	width: 70px;
+	height: 70px;
+	background-color: #f25;
+	border-radius: 10px;
+	box-shadow: 0 5px 5px rgba(1, 23, 46, 0.6);
+	padding: 5px;
+	margin: 5px;
+	font-size: 40px;
+	text-align: center;
+	display: flex;
+	flex-wrap: nowrap;
+	justify-content: center;
+	align-items: center;
+	color: #efefef;
+	/*border: 2px solid #efefef;*/
+}
+
+/* ----PRODUCT COMO MODAL */
+
+.container-delatils-products{
+	opacity: 0;
+	visibility: hidden;
+	position: fixed;
+	z-index: 1000;
+	width: 100%;
+	/* height: 100vh; */
+	overflow-y: scroll !important;
+	top: 80px;
+	margin-top: -30px;
+	left: 0;
+	background-color: #fff;
+	/* display: flex;
+	justify-content: center;
+	align-items: center; */
+	transform: translateX(0%);
+	padding-bottom: 30px;
+}
+
+.container-delatils-products-modal{
+	max-width: 100%;
+	height: 100vh;
+	background-color: #fff !important;
+	/* overflow-y: scroll !important; */
+  scroll-behavior: smooth !important;
+	padding-bottom: 40px;
+	/* transform: translate(-50%, -50%); */
+	/* /* border-radius: 5px; */
+	position: relative;
+	z-index: 999 !important;
+	/* transition: transform 2s; */
+	transform: translateY(0%);
+	border: transparent;
+}
+
+.cerrar-modal{
+	position: absolute;
+	top: 6px;
+	right: 10px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	align-content: center;
+	width: 25px;
+	height: 25px;
+	background: rgb(252, 133, 133);
+	color: #fff;
+	line-height: 25px;
+	cursor: pointer;
+	border-radius: 50%;
+	z-index: 9999 !important;
+}
+
+.navbar-pric{
+	position: fixed;
+	/* /* z-index: 9999; */
+	max-width: 100%;
+	margin-top: -56px; 
+	z-index: 999999999999999;
+	
+}
+
+@media only screen and (max-width: 1024px){
+	.navbar-pric{
+		position: fixed;
+		/* /* z-index: 9999; */
+		min-width: 100%;
+		margin-top: -56px; 
+		z-index: 999999999999999999999;
+		
+	}
+}
+
+.display{
+	display: none;
+}
+
+
+.img-sec11{
+	width: 350px;
+	height: 400px;
+	object-fit: cover;
+	margin: auto;
+	margin-top: 15px;
+	margin-bottom: 15px;
+}
+
+.display11{
+	padding-bottom: 15px;
+}
+
+.subdetails-titulo{
+	font-weight:600;
+}
+/* 
+#precio22{
+	font-weight:900;
+} */

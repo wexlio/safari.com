@@ -590,8 +590,7 @@ footer div:nth-child(4){
 	background: #fff;
 	overflow-y: scroll;
 	padding: 11px;
-	/*transform: translate(-50%, -50%);*/
-
+	transform: translate(-50%, -50%);
 	border-radius: 5px;
 	position: relative;
 	transition: transform 2s;
