@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Tu tienda virtual</title>
+
+		<meta charset="utf-8">
+		<link rel="stylesheet" type="text/css" href="estilos.css">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Lato:wght@400&display=swap" rel="stylesheet">
+		<script src="https://kit.fontawesome.com/a0b923a8b2.js" crossorigin="anonymous"></script>
+		<link rel="icon" href="img/logo.ico">
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.2/xlsx.full.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.2/xlsx.full.min.js" integrity="sha512-qilAGdDSZ5c0sTjizcSCffmIb8D2rHttMYGUxtI3OFn8lB29BlU2tEUcPesHHLQ2t0Y5TInglWKY6V3GoSK0IA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+</head>
+<body>
+
+	<div class="contenedor-bienvenido">
+		<h1 class="titulo-cargar-archivo">Bienvenido</h1>
+		<div class="indicaciones">
+			<span>✅Desde aquí podrás crear tu tienda virtual.</span><br>
+			<span>✅Solo debes rellenar el archivo excel correctamente y subirlo a continuación:</span>
+		</div>
+
+		<div class="botones-cargar">
+			<span class="poderio" id="poderio-belico">🔴A continuación sube el excel donde van los productos, nombre y demàs detalles de tu tienda virtual. Luego dale al boton "CARGAR" y luego a "EXPORTAR" y ¡WALA! tu tienda virtual ya estarà casi lista:</span>
+			<div class="archivo-titulos-detalles">
+				<input type="file" class="form-detalles" id="inputs11" accept=".xls, .xlsx, .csv">
+			</div>
+			<div class="subir-archivo">
+				<button class="btn-subir" id="button-cargar-excel">CARGAR</button>
+			</div>
+<!-- 
+			<span class="poderio" id="poderio-belico">🔴A continuación sube el excel donde van los nombres de productos con sus precios, descripcion e imagenes:</span>
+			<div class="archivo-productos">
+				<input type="file" class="form-productos" id="inputs11" accept=".xls, .xlsx">
+			</div>
+
+			<div class="subir-archivo">
+				<button class="btn-subir" id="button-cargar-excel">CARGAR</button>
+			</div> -->
+
+			<!-- <button id="ver-pagina"><b>VER MI PÁGINA</b></button> -->
+
+<h2 class="titulo-cargar-archivo">Exportar productos</h2>
+ <!-- <p>Escribe para exportar</p> -->
+ <!-- <input type="text" id="texto-archivo" /> -->
+ <button id="exportar">Exportar</button>
+
+		</div>
+		<div id="jsondata">		
+		</div>
+	</div>
+	<script src="codigo3.js"></script>
+	<script src="ejemplo.js"></script>
+	<!-- <script src="variables.js"></script> -->
+</body>
+</html>
